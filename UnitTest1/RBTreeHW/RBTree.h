@@ -4,7 +4,8 @@
 class RBTree {
 public:
 	RBTree(RBTreeNode* r): root(r){}
-	RBTree(int k) : root(&RBTreeNode(k)){}
+	RBTree(int k);
+	//RBTree(int k) : root(&RBTreeNode(k)){}
 	RBTreeNode* root;
 
 	// Two balancing operations
