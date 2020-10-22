@@ -15,6 +15,7 @@ public:
 	RBTreeNode* getRoot();
 	void setRoot(RBTreeNode*);
 	int size();
+	bool isRed(RBTreeNode*);
 
 private:
 	RBTreeNode* root;
@@ -29,6 +30,6 @@ private:
 	RBTreeNode* eraseMIN(RBTreeNode*);
 	RBTreeNode* eraseMAX(RBTreeNode*);
 	RBTreeNode* uncle(RBTreeNode*);
-	bool isRed(RBTreeNode*);
+	
 	int sizeSubtree(RBTreeNode*);
 };
