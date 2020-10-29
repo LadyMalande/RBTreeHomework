@@ -1,13 +1,15 @@
 #pragma once
 #include "RBTree.h"
+#include <iostream>
 
 class RBTreeDefinitionTester {
-public: void test(RBTree*);
+public: bool test(RBTree*);
 private: 
-	void BSTDefinition(RBTree*);
+	bool BSTDefinition(RBTree*);
 	// Methods for 4 stages of RBTree difinition
-	void rootIsBlack(RBTree*);
-	void childrenOfRedNodeAreBlack(RBTree*);
-	void allPathsToNilsGoThroughSameNumberOfBlack(RBTree*);
+	bool rootIsBlack(RBTree*);
+	bool childrenOfRedNodeAreBlack(RBTree*);
+	bool allPathsToNilsGoThroughSameNumberOfBlack(RBTree*);
+	bool ifOnlyChildIsRedItsOnLeft(RBTree* tree);
 
 };

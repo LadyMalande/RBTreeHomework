@@ -1,8 +1,10 @@
 ﻿#include "pch.h"
 #include "CppUnitTest.h"
 #include "../RBTreeHW/RBTree.cpp"
+#include "../RBTreeHW/RBTree.h"
 #include "../RBTreeHW/RBTreeNode.h"
-
+#include "../RBTreeHW/RBTreeNode.cpp"
+/* The tests were moved to RBTreeDefinitionTester.cpp
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace RBTreeDefinitionTest
@@ -80,3 +82,5 @@ namespace RBTreeDefinitionTest
 		}		
 	};
 }
+
+*/

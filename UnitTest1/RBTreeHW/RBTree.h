@@ -1,35 +1,34 @@
 #pragma once
-#include "RBTreeNode.h"
 
+#include <limits>
+class RBTreeNode;
 class RBTree {
 public:
 	// Constructors
-	RBTree(RBTreeNode* r): root(r){}
-	RBTree(int k);
 	RBTree();
 	// Basic functions of the tree
-	bool insert(int);
-	RBTreeNode* findKthMIN(int);
+
+	int findKthMIN(int);
 	bool erase(int);
-	RBTreeNode* find(int);
+	bool find(int);
 	RBTreeNode* getRoot();
-	void setRoot(RBTreeNode*);
+	
+	void insertRoot(RBTreeNode*);
 	int size();
-	bool isRed(RBTreeNode*);
 
 private:
 	RBTreeNode* root;
 
 	// Two balancing operations
 	void rotateRedEdge(RBTreeNode*);
-	void recolor(RBTreeNode*);
 
 	// Support function of the tree
 	RBTreeNode* moveRedLeft(RBTreeNode*);
 	RBTreeNode* moveRedRight(RBTreeNode*);
 	RBTreeNode* eraseMIN(RBTreeNode*);
 	RBTreeNode* eraseMAX(RBTreeNode*);
-	RBTreeNode* uncle(RBTreeNode*);
+
+	// setRoot is only for balancing operations, its not visible to other classes
+	void setRoot(RBTreeNode* newroot);
 	
-	int sizeSubtree(RBTreeNode*);
 };
