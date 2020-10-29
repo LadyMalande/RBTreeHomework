@@ -13,6 +13,15 @@ int RBTree::findKthMIN(int k) {
 	return INT_MIN;
 }
 
+void RBTree::printTree() {
+	RBTreeNode* node = root;
+
+	node->print();
+		
+
+
+}
+
 bool RBTree::erase(int) {
 	// TODO
 	return false;

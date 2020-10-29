@@ -13,31 +13,28 @@ namespace UnitTest1
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-		/*
+		
 		TEST_METHOD_INITIALIZE(buildTree)
 		{
 			// Code that runs before every TEST_METHOD which is in method buildTree
-			RBTreeNode firstNode = RBTreeNode(5);
-			RBTree tree = RBTree();
-
 
 			// Inserting values
-			RBTreeNode(5).insert(&tree);
-			RBTreeNode(8).insert(&tree);
-			RBTreeNode(3).insert(&tree);
-			RBTreeNode(4).insert(&tree);
-			RBTreeNode(4).insert(&tree);
-			RBTreeNode(15).insert(&tree);
-			RBTreeNode(1).insert(&tree);
-			RBTreeNode(7).insert(&tree);
-			RBTreeNode(9).insert(&tree);
-			RBTreeNode(2).insert(&tree);
-			RBTreeNode(11).insert(&tree);
-			RBTreeNode(6).insert(&tree);
-			RBTreeNode(10).insert(&tree);
+			RBTreeNode(5).insert(&testTree);
+			RBTreeNode(8).insert(&testTree);
+			RBTreeNode(3).insert(&testTree);
+			RBTreeNode(4).insert(&testTree);
+			RBTreeNode(4).insert(&testTree);
+			RBTreeNode(15).insert(&testTree);
+			RBTreeNode(1).insert(&testTree);
+			RBTreeNode(7).insert(&testTree);
+			RBTreeNode(9).insert(&testTree);
+			RBTreeNode(2).insert(&testTree);
+			RBTreeNode(11).insert(&testTree);
+			RBTreeNode(6).insert(&testTree);
+			RBTreeNode(10).insert(&testTree);
 
 		}
-		*/
+		
 		TEST_METHOD(RBTreeConstructorTest)
 		{
 			RBTreeNode firstNode = RBTreeNode(1);
@@ -85,7 +82,21 @@ namespace UnitTest1
 		}
 
 		TEST_METHOD(RBTreeFindExistsReturn) {
-			Assert::IsTrue(testTree.find(9));
+			RBTreeNode(5).insert(&testTree);
+			RBTreeNode(8).insert(&testTree);
+			RBTreeNode(3).insert(&testTree);
+			RBTreeNode(4).insert(&testTree);
+			RBTreeNode(4).insert(&testTree);
+			RBTreeNode(15).insert(&testTree);
+			RBTreeNode(1).insert(&testTree);
+			RBTreeNode(7).insert(&testTree);
+			RBTreeNode(9).insert(&testTree);
+			RBTreeNode(2).insert(&testTree);
+			RBTreeNode(11).insert(&testTree);
+			RBTreeNode(6).insert(&testTree);
+			RBTreeNode(10).insert(&testTree);
+
+			Assert::IsTrue(testTree.find(1));
 		}
 
 		TEST_METHOD(RBTreeFindDoesntExistReturn) {

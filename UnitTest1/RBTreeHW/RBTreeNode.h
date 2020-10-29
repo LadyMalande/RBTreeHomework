@@ -4,7 +4,7 @@
 class RBTreeNode {
 public:
 	// Constructors	
-	RBTreeNode(int k) : red(true), left(nullptr), right(nullptr), parent(nullptr), key(k), sizeOfLeftTree(0) { printf("%d", k); printf("%d", key); }
+	RBTreeNode(int k) : red(true), left(nullptr), right(nullptr), parent(nullptr), key(k), sizeOfLeftTree(0) { }
 	bool insert(RBTree* tree);
 
 	//size of left subtree strating from this node excluding this node
@@ -21,6 +21,8 @@ public:
 	bool LLRBT();
 
 	bool parentsChildrenCheck();
+
+	void print();
 	
 	
 private:
@@ -35,6 +37,11 @@ private:
 
 	RBTreeNode* uncle();
 	void recolor(RBTreeNode*);
+	void recolor4vertex(RBTreeNode*);
+	void rotateRedEdge(RBTreeNode*);
+	bool is4vertex();
+	bool isRed(RBTreeNode*);
+	bool insertRecursion(RBTreeNode* node);
 
 	// Supporting functions for tests
 	int getMinFromRight();

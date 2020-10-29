@@ -16,6 +16,8 @@ public:
 	void insertRoot(RBTreeNode*);
 	int size();
 
+	void printTree();
+
 private:
 	RBTreeNode* root;
 

@@ -2,10 +2,31 @@
 //
 
 #include <iostream>
+#include "RBTree.h"
+#include "RBTreeNode.h"
+
+using namespace std;
 
 int main()
 {
     std::cout << "Hello World!\n";
+	RBTree tree = RBTree();
+	RBTreeNode(5).insert(&tree);
+	RBTreeNode(8).insert(&tree);
+	RBTreeNode(3).insert(&tree);
+	RBTreeNode(4).insert(&tree);
+	RBTreeNode(4).insert(&tree);
+	RBTreeNode(15).insert(&tree);
+	RBTreeNode(1).insert(&tree);
+	RBTreeNode(7).insert(&tree);
+	RBTreeNode(9).insert(&tree);
+	RBTreeNode(2).insert(&tree);
+	RBTreeNode(11).insert(&tree);
+	RBTreeNode(6).insert(&tree);
+	RBTreeNode(10).insert(&tree);
+
+	tree.printTree();
+	cout << tree.find(1) << endl;
 }
 
 // Spuštění programu: Ctrl+F5 nebo nabídka Ladit > Spustit bez ladění

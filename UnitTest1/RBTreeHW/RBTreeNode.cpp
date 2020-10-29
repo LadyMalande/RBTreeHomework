@@ -1,54 +1,126 @@
 
 #include "RBTreeNode.h"
 
+using namespace std;
+
 bool RBTreeNode::insert(RBTree* tree) {
-	// When crating new node, the node is red from its constructor
-	if (tree->getRoot() == nullptr) {
+	RBTreeNode* root = tree->getRoot();
+	if (root == nullptr) {
 		red = false;
 		tree->insertRoot(this);
+		cout << "Root inserted" << key << endl;
 		// Newly added root is black
 		return true;
+		
 	}
 	else {
-		RBTreeNode* node = tree->getRoot();
-		while (node) {
+		cout << "Trying to insert " << key << endl;
+		return insertRecursion(root);
+	}
+	
+}
+
+bool RBTreeNode::insertRecursion(RBTreeNode* node) {
+
+			// WE go down the tree and whenever we see a 4-vertex, we recolor it
+			if (node->is4vertex()) {
+				node->recolor4vertex(node);
+			}
+			if (key == node->key) {
+				return false;
+			}
 			if (key < node->key) {
 				if (node->left) {
-					node = node->left;
+					if (!insertRecursion(node->left)) {
+						return false;
+					}
 				}
 				else {
 					node->left = this;
+					red = true;
 					parent = node;
+					left = nullptr;
+					right = nullptr;
+					return true;
 				}
 			}
 			else if (key > node->key) {
 				if (node->right) {
-					node = node->right;
+					if (!insertRecursion(node->right)) {
+						return false;
+					}
 				}
 				else {
-
+					
 					node->right = this;
 					parent = node;
+					red = true;
+					left = nullptr;
+					right = nullptr;
+					return true;
 				}
 			}
-		}
+
 		// the node is inserted
 
-		// parent is red, we must do some editing
-		if (parent->red) {
-			if ((uncle()->red)) {
-				recolor(parent);
-				recolor(uncle());
-				recolor(parent->parent);
-			}
-			else {
+	if (!isRed(node->left) && isRed(node->right)) {
+				rotateRedEdge(node->right);
+	}
 
-			}
-		}
+	if (isRed(node->left) && isRed(node->left->left)) {
+		rotateRedEdge(node->left);
+	}
+	
+	return true;
+}
 
+// Two balancing operations
+void RBTreeNode::rotateRedEdge(RBTreeNode* node) {
+	//node byl cerveny, posune se nahoru misto parenta a prebarvi se
+	RBTreeNode* formerParent = node->parent;
+	RBTreeNode* formerOtherKidOfNode;
+	if (node->parent->key > node->key) {
+		// rodic je vetsi, jsme tedy nalevo od nej
+		formerOtherKidOfNode = node->right;
+		node->right = node->parent;
+		node->parent = node->parent->parent;
+		node->red = false;
+		formerParent->left = formerOtherKidOfNode;
+		formerParent->parent = node;
+		formerParent->red = true;
 
 	}
-	return false;
+	else {
+		// rodic je mensi, jsme nalevo od nej
+		formerOtherKidOfNode = node->left;
+		node->left = node->parent;
+		node->parent = node->parent->parent;
+		node->red = false;
+		formerParent->right = formerOtherKidOfNode;
+		formerParent->parent = node;
+		formerParent->red = true;
+	}
+}
+
+void RBTreeNode::recolor4vertex(RBTreeNode* node) {
+	// presouvame barvu do deti
+	recolor(node);
+	recolor(node->left);
+	recolor(node->right);
+}
+
+bool RBTreeNode::is4vertex() {
+	// Jsou li obe deti cervene, prebarvujeme
+	if (isRed(left) == true && (isRed(left) == isRed(right)) && (isRed(left) != red)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool RBTreeNode::isRed(RBTreeNode* node) {
+	return node ? node->red : false;
 }
 
 int RBTreeNode::countSizeOfLeftTree() {
@@ -120,13 +192,14 @@ int RBTreeNode::findKthMin(int k) {
 
 }
 
-bool RBTreeNode::find(int key) {
+bool RBTreeNode::find(int k) {
 	RBTreeNode* node = this;
 	while (node) {
-		if (key == node->key) {
+		cout << "Hledam " << k << " v nodu " << node->key << endl;
+		if (k == node->key) {
 			return true;
 		}
-		else if (key < node->key) {
+		else if (k < node->key) {
 			node = node->left;
 		}
 		else {
@@ -287,4 +360,28 @@ bool RBTreeNode::parentsChildrenCheckRecursion(RBTreeNode* node) {
 		// node does not have parent so parent cant be checked
 		return true;
 	}
+}
+
+void RBTreeNode::print() {
+		
+		
+		
+		if (left && right) {
+			cout << key << " LEFT: " << left->key << "    RIGHT: " << right->key << endl;
+		}
+		else if (left && !right) {
+			cout << key << " LEFT: " << left->key << "    RIGHT: NULL" << endl;
+		}
+		else if (!left && right) {
+			cout << key << " LEFT: NULL    RIGHT: " << right->key << endl;
+		}
+		else {
+			cout << key << " LEFT: NULL    RIGHT: NULL" << endl;
+		}
+		if (left) {
+			left->print();
+		}
+		if (right) {
+			right->print();
+		}
 }
