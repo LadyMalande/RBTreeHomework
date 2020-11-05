@@ -154,12 +154,10 @@
     <ClCompile Include="RBTree.cpp" />
     <ClCompile Include="RBTreeDefinitionTester.cpp" />
     <ClCompile Include="RBTreeHW.cpp" />
-    <ClCompile Include="RBTreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RBTree.h" />
     <ClInclude Include="RBTreeDefinitionTester.h" />
-    <ClInclude Include="RBTreeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

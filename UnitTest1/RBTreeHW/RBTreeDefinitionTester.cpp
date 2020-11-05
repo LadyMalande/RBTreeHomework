@@ -25,26 +25,26 @@ bool RBTreeDefinitionTester::test(RBTree* tree) {
 
 // binary search tree definition: The maximum of left sub tree is less than current node, the minimum of right subtree is bigger than current node
 bool RBTreeDefinitionTester::BSTDefinition(RBTree* tree) {
-	return tree->getRoot()->BSTDefinition();
+	return tree->BSTDefinition();
 }
 // Methods for 3 stages of RBTree difinition
 
 // Root of the Red Black tree is always black
 bool RBTreeDefinitionTester::rootIsBlack(RBTree* tree) {
-	return tree->getRoot()->rootIsBlack();
+	return tree->rootIsBlack();
 }
 
 // Children of red nodes are black == There are no two red nodes in a path from root to leaf directly after each other
 bool RBTreeDefinitionTester::childrenOfRedNodeAreBlack(RBTree* tree) {
-	return tree->getRoot()->childrenAreBlack();
+	return tree->childrenAreBlack();
 }
 
 // All paths from root to leaves included go through the same number of black nodes
 bool RBTreeDefinitionTester::allPathsToNilsGoThroughSameNumberOfBlack(RBTree* tree) {
-	return tree->getRoot()->sameBlackOnPath();
+	return tree->sameBlackOnPath();
 }
 
 // The left-leaning RBTree definition - if there is only one red child, it is the left child of current node
 bool RBTreeDefinitionTester::ifOnlyChildIsRedItsOnLeft(RBTree* tree) {
-	return tree->getRoot()->LLRBT();
+	return tree->LLRBT();
 }

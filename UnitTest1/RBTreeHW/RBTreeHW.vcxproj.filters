@@ -24,14 +24,8 @@
     <ClCompile Include="RBTreeDefinitionTester.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
-    <ClCompile Include="RBTreeNode.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RBTreeNode.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
     <ClInclude Include="RBTree.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>

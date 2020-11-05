@@ -2,117 +2,85 @@
 #include "CppUnitTest.h"
 #include "../RBTreeHW/RBTree.cpp"
 #include "../RBTreeHW/RBTree.h"
-#include "../RBTreeHW/RBTreeNode.h"
-#include "../RBTreeHW/RBTreeNode.cpp"
+
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 
 namespace UnitTest1
 {
+	class RBTreeNodeTest;
+	class RBTreeTest{
+	public:		
+		RBTreeNodeTest* root;
+		void clean() {
+			root = nullptr;
+		}
+	};
+	class RBTreeNodeTest {
+	public:
+		RBTreeNodeTest(int k) : red(true), left(nullptr), right(nullptr), parent(nullptr), key(k), sizeOfLeftTree(0) { }
+		RBTreeNodeTest* left;
+		RBTreeNodeTest* right;
+		RBTreeNodeTest* parent;
+		int key;
+		bool red;
+		int sizeOfLeftTree;
+	};
+
 	TEST_CLASS(UnitTest1)
 	{
 	public:
 		
-		TEST_METHOD_INITIALIZE(buildTree)
+		TEST_METHOD_INITIALIZE(clean)
 		{
 			// Code that runs before every TEST_METHOD which is in method buildTree
-
-			// Inserting values
-			RBTreeNode(5).insert(&testTree);
-			RBTreeNode(8).insert(&testTree);
-			RBTreeNode(3).insert(&testTree);
-			RBTreeNode(4).insert(&testTree);
-			RBTreeNode(4).insert(&testTree);
-			RBTreeNode(15).insert(&testTree);
-			RBTreeNode(1).insert(&testTree);
-			RBTreeNode(7).insert(&testTree);
-			RBTreeNode(9).insert(&testTree);
-			RBTreeNode(2).insert(&testTree);
-			RBTreeNode(11).insert(&testTree);
-			RBTreeNode(6).insert(&testTree);
-			RBTreeNode(10).insert(&testTree);
-
+			tree.clean();
 		}
 		
-		TEST_METHOD(RBTreeConstructorTest)
-		{
-			RBTreeNode firstNode = RBTreeNode(1);
-			RBTree tree = RBTree();
-			firstNode.insert(&tree);
-			Assert::IsNotNull(tree.getRoot());
+		TEST_METHOD(RBTreeConstructorTestTrue)
+		{						
+			Assert::IsTrue(tree.insert(2));
 		}
-
+/*
+		TEST_METHOD(RBTreeConstructorTestFalse)
+		{
+			tree.insert(2);
+			Assert::IsFalse(tree.insert(2));
+		}
+*/
 		TEST_METHOD(RBTreeNumberOfNodesAfterInsert) {
-			Assert::AreEqual(13, testTree.size());
+			for (int i : {2, 3, 4, 5, 6, 1, 0}) { 
+				tree.insert(i); }
+			Assert::AreEqual(tree.size(), 7);
 		}
 
 		TEST_METHOD(RBTreeInsertShapeCheck) {
-			{
-				Assert::IsTrue(testTree.getRoot()->parentsChildrenCheck());
-
-			}
+			
 		}
 
 		TEST_METHOD(RBTreeShapeAfterDelete) {
-			testTree.erase(10);
-			{
-				// The only value that vanished is the erased one
-				Assert::IsFalse(testTree.find(10));
-				Assert::IsTrue(testTree.find(1));
-				Assert::IsTrue(testTree.find(2));
-				Assert::IsTrue(testTree.find(3));
-				Assert::IsTrue(testTree.find(4));
-				Assert::IsTrue(testTree.find(5));
-				Assert::IsTrue(testTree.find(6));
-				Assert::IsTrue(testTree.find(7));
-				Assert::IsTrue(testTree.find(8));
-				Assert::IsTrue(testTree.find(9));
-				Assert::IsTrue(testTree.find(10));
-				Assert::IsTrue(testTree.find(11));
-				Assert::IsTrue(testTree.find(12));
-				Assert::IsTrue(testTree.find(15));
-			}
 			
 		}
 
 		TEST_METHOD(RBTreeSizeAfterDelete) {
-			testTree.erase(10);
-			Assert::AreEqual(12, testTree.size());
+
 		}
 
 		TEST_METHOD(RBTreeFindExistsReturn) {
-			RBTreeNode(5).insert(&testTree);
-			RBTreeNode(8).insert(&testTree);
-			RBTreeNode(3).insert(&testTree);
-			RBTreeNode(4).insert(&testTree);
-			RBTreeNode(4).insert(&testTree);
-			RBTreeNode(15).insert(&testTree);
-			RBTreeNode(1).insert(&testTree);
-			RBTreeNode(7).insert(&testTree);
-			RBTreeNode(9).insert(&testTree);
-			RBTreeNode(2).insert(&testTree);
-			RBTreeNode(11).insert(&testTree);
-			RBTreeNode(6).insert(&testTree);
-			RBTreeNode(10).insert(&testTree);
 
-			Assert::IsTrue(testTree.find(1));
 		}
 
 		TEST_METHOD(RBTreeFindDoesntExistReturn) {
-			Assert::IsFalse(testTree.find(14));
-			Assert::IsFalse(testTree.find(0));
+
 		}
 
 		TEST_METHOD(RBTreeKthMINFindReturn) {
-			for (int i = 1; i < 13; i++) {
-				Assert::AreEqual(i, testTree.findKthMIN(i));
-			}			
+		
 		}
 
 		TEST_METHOD(RBTreeKthMINFindOutOfBounds) {
-			Assert::IsFalse(testTree.findKthMIN(0));
-			Assert::IsFalse(testTree.findKthMIN(14));
+
 		}
 
 		TEST_METHOD(RBTreeNodeIsRedAfterInsert) {
@@ -120,38 +88,48 @@ namespace UnitTest1
 		}
 
 	private:
-		RBTree testTree;
+		RBTreeTest referenceTree;
+		RBTree tree;
+		
 
-		/*
 		void buildTree() {
+			
 			//Making tree
-			RBTreeNode firstNode = RBTreeNode(5);
-			RBTree tree = RBTree();
+			
+			RBTreeNodeTest zero(0);
+			RBTreeNodeTest one(1);
+			RBTreeNodeTest two(2);
+			RBTreeNodeTest three(3);
+			RBTreeNodeTest four(4);
+			RBTreeNodeTest five(5);
+			RBTreeNodeTest six(6);
+			referenceTree.root = &three;
+			zero.parent = &one;
+			two.parent = &one;
+			one.red = false;
+			one.left = &zero;
+			one.right = &two;
+			one.parent = &three;
+			three.red = false;
+			three.left = &one;
+			three.right = &five;
+			five.red = false;
+			five.left = &four;
+			five.right = &six;
+			five.parent = &three;
+			four.parent = &five;
+			six.parent = &five;
+
 
 
 			// Inserting values
-			RBTreeNode(5).insert(&tree);
-			RBTreeNode(8).insert(&tree);
-			RBTreeNode(3).insert(&tree);
-			RBTreeNode(4).insert(&tree);
-			RBTreeNode(4).insert(&tree);
-			RBTreeNode(15).insert(&tree);
-			RBTreeNode(1).insert(&tree);
-			RBTreeNode(7).insert(&tree);
-			RBTreeNode(9).insert(&tree);
-			RBTreeNode(2).insert(&tree);
-			RBTreeNode(11).insert(&tree);
-			RBTreeNode(6).insert(&tree);
-			RBTreeNode(10).insert(&tree);
+
 
 			// Tree Shape
 			
-			//				8
-			//		4		         12
-			//   2	   6		  10      15
-			//1     3  5   7      9   11
-			
-		}
-		*/
+			//				3
+			//     1              5
+		}//    0      2       4      6
+
 	};
 }
